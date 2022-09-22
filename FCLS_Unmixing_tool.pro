@@ -27,9 +27,9 @@
 ;       ]
 ;METHODS:
 ;  Fully Constrained Least Squared Method: Fraction is solved with sum-to-one and nonnegative constrained method
-;  FCLS method is 
+;  This FCLS code is based on a method proposed by Dr. Xi LI in Wuhan University. The method was documented in an email from Dr. Xili to Xuehong Chen
+;  The code is designed in an vector-style with high efficenciy   
 ;  
-;
 ;OUTPUT:
 ; Fraction data: n+1 bands, the last band is residual error (RMSE).
 ;
