@@ -1,19 +1,21 @@
 # FCLS_IDL  
-IDL code for Fully Constrained Least Square for Unmixing  
-  
+ 
 ; This program is used for linear spectral unmixing with fully constrained least squared method (FCLS) for multi-spectral image.  
-; How to use?   
-;  Option 1: Compile and Run the program, then set input and output data path through GUI.   
-;  Option 2: use the function of 'FCLS_unmixing' in IDL code  
-;      Result=FCLS_unmixing(ImgData, endmember, residual=residual, end_names=end_names)  
 ;  
-; Linear Spectral Mixture Model  
-;      Mixed_spectrum=f1*endmember_1 + f2*endmember_2 +...+ fn*endmember_n  
+## Linear Spectral Mixture Model  
+;      Mixed_spectrum=f1×endmember_1 + f2×endmember_2 +...+ fn×endmember_n  
 ;      constrains: f1+f2+...+fn=1 & f1, f2,... fn >=0  
-;      n: number of endmembers  
-;  
-;INPUT:  
-; Option 1: 
+;      n: number of endmembers    
+  
+## METHOD:  
+;  Fully Constrained Least Squared Method: Fraction is solved with sum-to-one and nonnegative constrained method  
+;  This FCLS code is based on a method proposed by Dr. Xi LI in Wuhan University. The method was documented in an email from Dr. Xili to Xuehong Chen
+;  The code is designed in an vector-style with high efficenciy  
+
+## HOW TO USE   
+### Option 1: Compile and Run the program in ENVI+IDL environment, then set input and output data path through GUI.   
+
+ INPUT:  
 ;  Multispectral Image: ENVI standard file  
 ;  Endmember: csv file (first line is endmember name, first row is band number/wavelength, others are endmember data)  
 ;      For Example  
@@ -26,27 +28,23 @@ IDL code for Fully Constrained Least Square for Unmixing
 ;             896.8, 0.230096667, 0.190093333, 0.193353333  
 ;             1020.6,  0.226776667, 0.17783, 0.195176667  
 ;       ”    
-; Option 2:   
+    
+ OUTPUT:  
+; Fraction data (ENVI standard file): n+1 bands, the last band is residual error (RMSE).  
+
+### Option 2: use the function of 'FCLS_unmixing' in IDL code  
 ;  SYNTAX  
 ;   Result=FCLS_unmixing(ImgData, endmember, residual=residual, end_names=end_names)  
 ;  
-;  RETURN VALUE: Result data of 3-dimension matrix(ns*nl*n_endmember)  (n_endmember is number of endmembers, ns and nl are the size of input image)  
+;  RETURN VALUE: Result data of 3-dimension matrix(ns×nl×n_endmember)  (n_endmember is number of endmembers, ns and nl are the size of input image)  
 ;  
 ;  INPUT:    
-;   ImgData: 3-dimension matrix(ns*nl*nb)  (nb is the number of spectral bands)  
-;   endmember: 2-dimension matrix (n*nb) of endmember spectra  
+;   ImgData: 3-dimension matrix(ns×nl×nb)  (nb is the number of spectral bands)  
+;   endmember: 2-dimension matrix (n×nb) of endmember spectra  
 ;    
 ； KEYWORDS:  
-;   residual: 2-dimension matrix (ns*nl), residual of linear spectral mixture model  
+;   residual: 2-dimension matrix (ns×nl), residual of linear spectral mixture model  
 ;   end_names: names of endmember  
-
-;METHODS:  
-;  Fully Constrained Least Squared Method: Fraction is solved with sum-to-one and nonnegative constrained method  
-;  This FCLS code is based on a method proposed by Dr. Xi LI in Wuhan University. The method was documented in an email from Dr. Xili to Xuehong Chen  
-;  The code is designed in an vector-style with high efficenciy     
-;    
-;OUTPUT:  
-; Fraction data: n+1 bands, the last band is residual error (RMSE).  
 ;  
-;AUTHOR:  
+## AUTHOR:  
 ; CHEN Xuehong (chenxuehong@bnu.edu.cn) @ Beijing Normal University, 2022-09.  
